@@ -54,7 +54,7 @@ def create(image_id):
         def send_simple_message():
             	return requests.post(
 		                "https://api.mailgun.net/v3/sandboxeaa30d1922044857bee3122cfe3ac0f9.mailgun.org/messages",
-		                auth=("api", "0c755bb89badb4492f69d8f73b0cfaac-07e45e2a-8f242430"),
+		                auth=("api", os.environ.get("MAILGUN_PRIVATE_KEY")),
 		                data={"from": "Excited User <mailgun@sandboxeaa30d1922044857bee3122cfe3ac0f9.mailgun.org>",
 			            "to": ["weikhang_93@hotmail.com"],
 			            "subject": "Hello hahaha",
