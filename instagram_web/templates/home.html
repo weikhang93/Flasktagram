@@ -1,12 +1,183 @@
 {% extends "_layout.html" %}
 
 {% block title %}
-  Homepage
+Homepage
 {% endblock %}
 
+
+
 {% block header %}
+
 {% endblock %}
 
 {% block content %}
-  <h1>Homepage</h1>
+
+{% if current_user.is_authenticated %}
+<style>
+  .thirdpartyservice:hover {
+    cursor: pointer;
+    animation: rotate 0.5s forwards;
+    box-shadow: 4px 4px 10px rgb(195, 0, 255);
+
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(5deg);
+    }
+
+  }
+</style>
+
+
+
+
+
+<h1 class="m-3">3rd party service that is integrated in <i style="color: rgb(122, 26, 212);"
+    class="fas fa-flask">tagram</i>.</h1>
+<div class="container-fluid">
+  <div style="position: relative; left: 30px;" class="row mt-3">
+    <div class="col-lg-3 col-md-3 col-sm-6">
+      <div class=" thirdpartyservice card rounded" style="width: 18rem; height: 50vh;">
+        <img style="height: 20vh;" class="card-img-top" src="/static/aws.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">S3 Bucket</h5>
+          <p class="card-text">Uploads picture into Amazon Web Service's S3 Bucket.</p>
+          <a href="{{url_for('users.edit', id=current_user.id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Go to your own profile!" >Upload Image now!</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6">
+      <div class="thirdpartyservice card rounded" style="width: 18rem; height: 50vh;">
+        <img style="height: 20vh;" class="card-img-top" src="/static/braintree.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Sandbox</h5>
+          <p class="card-text">Payment gateway of the donation for pictures.</p>
+          <a href="{{url_for('users.feed' ,username=current_user.username)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Find an image to donate at ImageFeed!">Donate now!</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6">
+      <div class="thirdpartyservice card rounded" style="width: 18rem; height: 50vh;">
+        <img style="height: 20vh;" class="card-img-top" src="/static/oauth2.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Google Oauth 2.0</h5>
+          <p class="card-text">Login via google email using protocol Oauth 2.0.</p>
+          <form action="{{url_for('sessions.destroy' , id=current_user.id)}}" method="POST">
+            <input hidden name="csrf_token" value="{{csrf_token()}}">
+            <button id="dropdownnav" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Logout and use Gmail to Login again!">Login using Google Email?</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6">
+      <div class="thirdpartyservice card rounded" style="width: 18rem; height: 50vh;">
+        <img style="height: 20vh;" class="card-img-top" src="/static/mailgun.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Mailgun</h5>
+          <p class="card-text">Automatically send an email after donation is received.</p>
+          <a href="{{url_for('users.feed' ,username=current_user.username)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Donate to someone! And you will receive a thank you email!">Test the feature</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+</script>
+
+
+
+{%else%}
+
+<div class="container">
+  <div style="align-items: center;" class="row mt-5">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <i style="color: rgb(122, 26, 212);" class="fas fa-flask fa-8x">tagram</i>
+      <br>
+      <br>
+      <h3 style="color:rgb(99, 22, 170)">An instagram clone that is created using</h3>
+      <h4 style="color: rgb(4, 2, 12);">
+        <div style="display: flex;">
+
+          <li style="align-self: center;">Flask</li>
+          <img width="50%" src="static/Flask_logo.svg" alt="flask_logo">
+
+        </div>
+      </h4>
+      <h4 style="color: rgb(6, 1, 10);">
+        <div style="display:flex">
+
+
+          <li style="align-self: center;">PostgreSQL</li>
+          <img width="25%" src="static/Postgresql_elephant.svg" alt="postgresql">
+        </div>
+      </h4>
+
+
+      <h4 style="color: rgb(13, 3, 22); position: relative;bottom: 40px;">
+        <div style="display: flex;">
+          <li style="align-self: center;">Bootstrap</li>
+          <img style="position: relative;left: 20px;" height="50%" src="static/bootstrap.png" alt="bootstrap">
+        </div>
+      </h4>
+
+    </div>
+    <div class="text-center col-lg-6 col-md-6 col-sm-12">
+      <h1>Login</h1>
+
+
+      <div class=" border border-primary pt-4 pb-5 rounded container d-flex justify-content-center mt-5">
+
+
+
+        <form action="{{url_for('sessions.create')}}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
+
+          <div class="form-group text-center">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group text-center">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+      </div>
+      <a href="{{url_for('sessions.google_login')}}">
+
+        <img class="mt-3" src="/static/google.png" alt="googleoauth">
+      </a>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endif %}
+
+
+
+
+
 {% endblock %}

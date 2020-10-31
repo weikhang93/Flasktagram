@@ -1,0 +1,93 @@
+{% extends '_layout.html' %}
+
+
+
+
+{% block content %}
+
+
+
+<style>
+    .zoomimage:hover {
+        animation: zoomes 0.5s forwards
+    }
+
+    @keyframes zoomes {
+        0% {
+            transform: scale(1)
+        }
+
+        100% {
+            transform: scale(1.25)
+        }
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            {% for image in current_user.image_feed %}
+
+            <div class="card mt-3 mb-3 ml-auto mr-auto shadow-lg" style="width: 100%;;">
+                <a href="{{url_for('images.show' , image_id=image.id)}}">
+
+                    <img src="{{image.full_image_url}}" class="zoomimage card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <a href="{{url_for('users.show' , username=image.user.username)}}">
+                        <h5 class="card-title">{{image.user.username}}</h5>
+
+                    </a>
+                    <div class="d-flex">
+
+
+                        <p style="align-self:center;" class="card-text ">Donate if you think this photo is cute
+                            enough.... Just like you</p>
+                        <img width="70px" src="/static/lovesign2.jpg" alt="flask_logo">
+                    </div>
+                    <a href="{{url_for('donations.new', image_id=image.id)}}" class="btn btn-primary">Donate</a>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            {% endfor %}
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="mt-5">
+
+                <ul style="right:100px" class="position-fixed list-group w-25">
+                    <li class="btn btn-outline-primary"><h5>
+                        Suggested User
+                    </h5></li>
+                    {% for element in current_user.ten_random_users %}
+                    <a style="text-decoration: none;" href="{{url_for('users.show' ,username=element.username)}}">
+                        <li class="btn btn-outline-info list-group-item d-flex justify-content-between align-items-center">
+                            <img style="border: 3px solid rgb(116, 37, 219)" class="rounded-circle " height="35px" width="35px" src="{{element.full_image_path}}">
+                            {{element.username}}
+                            <span class="badge badge-primary badge-pill">{{element.images|length}}</span>
+                        </li>
+                    </a>
+                    {% endfor %}
+                    
+                </ul>
+            </div>
+                
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

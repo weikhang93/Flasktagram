@@ -1,0 +1,84 @@
+{% extends '_layout.html' %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="card mt-3 mb-3 ml-3 mr-auto shadow-lg" style="width:100%;">
+        <img src="{{image.full_image_url}}" class="zoomimage card-img-top" alt="...">
+        <div class="card-body">
+          <a href="{{url_for('users.show' , username=image.user.username)}}">
+            <h5 class="card-title">{{image.user.username}}</h5>
+
+          </a>
+          <div class="d-flex">
+
+
+            <p style="align-self:center;" class="card-text ">Donate if you think this photo is cute
+              enough.... Just like you</p>
+            <img width="70px" src="/static/lovesign2.jpg" alt="flask_logo">
+          </div>
+          <a href="{{url_for('donations.new', image_id=image.id)}}" class="btn btn-primary">Donate</a>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="text-center col-lg-6 col-md-6 col-sm-12">
+      <h3 class="mt-3">Top 10 philanthropist for this image </h3>
+      <table class="ml-5 mt-3 table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">User</th>
+            <th scope="col">Amount <i class="fas fa-dollar-sign"></i></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for donation in image.top10|sort(attribute='amount' , reverse=true) %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td><a href="{{url_for('users.show' , username=donation.donor.username)}}">
+
+            {{donation.donor.username}}</a></td>
+            <td>{{donation.amount}}</td>
+
+          </tr>
+          {% endfor %}
+
+          {% for y in range(x) %}
+
+
+          <tr>
+            <th scope="row">{{loop.index+image.top10|length}}</th>
+            <td>-</td>
+            <td>-</td>
+
+          </tr>
+
+          {% endfor%}
+          
+
+        </tbody>
+      </table>
+
+      <h4>Wanna top this list? Donate more now!</h4>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+</div>
+{% endblock%}

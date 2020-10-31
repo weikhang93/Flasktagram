@@ -1,1 +1,33 @@
-<h1>Users#new</h1>
+{% extends "_layout.html" %}
+
+{% block content %}
+
+<div class="w-25 border border-primary pt-4 pb-5 rounded container d-flex justify-content-center mt-5">
+
+
+
+  <form action="{{url_for('users.create')}}" method="POST">
+    <input  type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
+    <div class="form-group text-center">
+      <label for="exampleInputEmail1">Username</label>
+      <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <small id="emailHelp" class="form-text text-muted">Please make sure its more than 6 characters.</small>
+    </div>
+    <div class="form-group text-center">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group text-center">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+
+
+{% endblock %}

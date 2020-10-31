@@ -1,0 +1,56 @@
+{% extends '_layout.html'%}
+
+
+{% block content%}
+
+<script src="https://js.braintreegateway.com/web/dropin/1.24.0/js/dropin.min.js"></script>
+
+
+
+
+<div class="text-center">
+
+  <img class="rounded mt-4" width="50%" src="{{image.full_image_url}}" alt="targetted_image_to_donate">
+
+</div>
+
+<div id="dropin-container"></div>
+<form id="form" action="{{url_for('donations.create', image_id=image.id)}}" method="POST">
+  <input hidden name="csrf_token" value="{{csrf_token()}}">
+  <label for="payment_amount">Donation amount</label>
+  <input name="payment_amount">
+  <input hidden id="nonce" name="payload_nonce">
+
+</form>
+<button class="btn btn-primary" id="submit-button">Donate</button>
+<script>
+  var button = document.querySelector('#submit-button');
+
+
+  braintree.dropin.create({
+    authorization: '{{client_token}}',
+    container: '#dropin-container'
+  }, function (createErr, instance) {
+    button.addEventListener('click', function () {
+      instance.requestPaymentMethod(function (err, payload) {
+        // Submit payload.nonce to your server
+        console.log(payload.nonce)
+        const payload_nonce = document.querySelector("#nonce")
+        payload_nonce.value = payload.nonce
+        const form = document.querySelector("#form")
+        form.submit()
+
+      });
+    });
+  });
+
+
+
+</script>
+
+
+
+
+
+
+{% endblock %}

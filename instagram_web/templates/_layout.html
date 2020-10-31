@@ -1,33 +1,157 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    {% assets "home_css" %}
-      <link rel="stylesheet" href="{{ ASSET_URL }}">
-    {% endassets %}
+  <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico') }}">
+  <script src="https://kit.fontawesome.com/430379f2a6.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 
-    {% assets "home_js" %}
-      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
 
-    {% block header %}
-    {% endblock %}
+  {% assets "home_css" %}
+  <link rel="stylesheet" href="{{ ASSET_URL }}">
+  {% endassets %}
 
-    <title>
-      {% block title %}
-      {% endblock %}NEXTAGRAM
-    </title>
+  {% assets "home_js" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
 
-  </head>
-  <body>
-    {% block content %}
-    {% endblock %}
-    <footer>
-      Made with &hearts; at <a target="_blank" href="https://www.nextacademy.com/?utm_source=github&utm_medium=student-challenge&utm_campaign=flask-nextagram">NEXT Academy</a>
-    </footer>
-  </body>
+  {% block header %}
+  {% endblock %}
+
+  <title>
+    {% block title %}
+
+    {% endblock %}Flasktagram
+  </title>
+
+</head>
+
+<body style="font-family: 'Varela Round', sans-serif;" class="bg-light">
+
+  <nav class="text-white navbar navbar-expand-lg navbar-light bg-primary">
+    <a class="text-white navbar-brand" href="{{url_for('home')}}">Flasktagram</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if current_user.is_authenticated %}
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('users.feed', username=current_user.username)}}">ImageFeed <span
+            class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('users.my_idols' , username=current_user.username)}}">Idols</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{url_for('users.my_fans' , username=current_user.username)}}">Follower</a>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            More
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{url_for('users.pending_idols' ,username=current_user.username)}}">Pending
+              Approval</a>
+              <a class="dropdown-item" href="{{url_for('users.fan_requests' , username=current_user.username)}}">Fan
+                Request</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{url_for('users.blockeduser')}}">Blocked User</a>
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+          
+          
+          {% if current_user.is_authenticated==False %}
+          <li class="nav-item">
+            <a class="text-white " href="{{url_for('users.new')}}">Sign Up</a>
+          </li>
+          {% endif %}
+          
+          
+          
+          {% if current_user.is_authenticated %}
+          <form action="{{url_for('users.search')}}"class="ml-auto form-inline my-2 my-lg-0" method="POST" >
+        <input name="username" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <input hidden name="csrf_token" value="{{csrf_token()}}">
+        <button class="text-dark btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <ul class="navbar-nav ml-auto mr-3">
+
+
+        <li class="nav-item dropdown">
+          
+
+
+            <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              {{current_user.username}}
+                          <img height="50px" width="50px" style="border-radius:300px 300px 300px 300px;"
+              src="{{current_user.full_image_path}}" alt="image-beside-setting">
+              Setting
+            </a>
+          
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{url_for('users.edit' ,id=current_user.id)}}">Edit Profile</a>
+            <div class="dropdown-divider"></div>
+            <form action="{{url_for('sessions.destroy' , id=current_user.id)}}" method="POST">
+              <input hidden name="csrf_token" value="{{csrf_token()}}">
+
+              <a  type="submit" class="dropdown-item m-0 p-0" href=""><button style="width: 100%; height: 100%;" class="p-0 m-0 btn btn-outline-danger" >
+                Logout
+              </button></a>
+            </form>
+          </div>
+        </li>
+      </ul>
+
+
+
+      {% endif %}
+    </div>
+  </nav>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+
+  {% for category, message in messages %}
+  <div style="text-align: center;">
+
+    <li id="flaskflash" class="alert alert-{{category}}">{{ message }}</li>
+  </div>
+  {% endfor %}
+
+  {% endif %}
+  {% endwith %}
+
+  {% block content %}
+  {% endblock %}
+  <br>
+  <br>
+
+  <footer>
+    Made with &hearts; at <a target="_blank"
+      href="https://www.nextacademy.com/?utm_source=github&utm_medium=student-challenge&utm_campaign=flask-nextagram">NEXT
+      Academy</a>
+  </footer>
+  <script>
+    let flaskflash = document.querySelector("#flaskflash")
+    if (flaskflash) {
+
+      setTimeout(() => {
+        flaskflash.parentNode.removeChild(flaskflash)
+
+      }, 5000)
+    }
+  </script>
+</body>
+
 </html>

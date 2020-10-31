@@ -1,0 +1,40 @@
+{% extends '_layout.html' %}
+
+
+{% block content %}
+
+<div class="container mt-3">
+
+    
+    <h3>Fans by chronological order</h3>
+    
+    <ul class="list-group w-25">
+        {% for element in current_user.my_fans %}
+        <a style="text-decoration: none;" href="{{url_for('users.show' ,username=element.username)}}">
+
+            <li class="btn btn-outline-info list-group-item d-flex justify-content-between align-items-center">
+                <img style="border: 3px solid rgb(116, 37, 219)" class="rounded-circle" height="35px" width="35px" src="{{element.full_image_path}}">
+                {{element.username}}
+                <form action="{{url_for('users.approve' , fan_username=element.username)}}" method="POST"> 
+                    <input hidden name="csrf_token" value="{{csrf_token()}}">
+
+                    <button class="btn btn-outline-danger">
+                        
+                        <span class="badge  badge-pill">Block</span>
+                    </button>
+                </form>
+            </li>
+        </a>
+        {% endfor %}
+        
+    </ul>
+ 
+    
+    
+</div>
+
+
+
+
+
+{% endblock %}

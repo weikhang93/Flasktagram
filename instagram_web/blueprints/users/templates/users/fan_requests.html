@@ -1,0 +1,89 @@
+{% extends "_layout.html" %}
+
+
+
+{% block content %}
+
+
+<h1>Future Philanthrophist that will donate to you.</h1>
+
+<div class="container mt-3">
+
+
+    <h3>Fan requests that is sorted by the date</h3>
+
+    <ul class="list-group w-50">
+        {% for element in current_user.fan_requests %}
+        <a style="text-decoration: none;" href="{{url_for('users.show' ,username=element.username)}}">
+
+            <li class="btn btn-outline-info list-group-item d-flex justify-content-between align-items-center">
+                <img style="border: 3px solid rgb(116, 37, 219)" class="rounded-circle" height="35px" width="35px" src="{{element.full_image_path}}">
+                {{element.username}}
+                <form id="approveorrejectform" action="{{url_for('users.approve' ,fan_username=element.username)}}"
+                    method="POST">
+                    <input hidden name="csrf_token" value="{{csrf_token()}}">
+
+
+                    <button id="approvebutton" class="btn btn-outline-success">
+                        <span class="badge  badge-pill">Approve</span>
+                    </button>
+
+
+                    <button id="rejectbutton" class="btn btn-outline-danger">
+
+                        <span class="badge  badge-pill">Reject/Block</span>
+                    </button>
+                </form>
+            </li>
+        </a>
+        {% endfor %}
+
+    </ul>
+
+
+
+
+</div>
+
+<script>
+    approveorrejectform = document.querySelector("#approveorrejectform")
+
+
+
+    approvebutton = document.querySelector("#approvebutton")
+    rejectbutton = document.querySelector("#rejectbutton")
+
+    approveorrejectform.addEventListener("submit", (e) => {
+        e.preventDefault()
+    })
+
+    approvebutton.addEventListener("click", () => {
+        input = document.createElement('input')
+        input.name = "inputbutton"
+        input.value = "approve"
+        input.hidden = true
+        console.log("hi")
+        approveorrejectform.append(input)
+        approveorrejectform.submit()
+
+    })
+
+
+    rejectbutton.addEventListener("click", () => {
+        input = document.createElement('input')
+        input.name = "inputbutton"
+        input.value = "reject"
+        input.hidden = true
+        approveorrejectform.append(input)
+        approveorrejectform.submit()
+
+
+    })
+
+</script>
+
+
+
+
+
+{% endblock %}
