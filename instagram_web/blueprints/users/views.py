@@ -395,3 +395,10 @@ def unblock(fan_username):
 
 
     return redirect(url_for('users.blockeduser'))
+
+
+@users_blueprint.route('/myportfolio')
+def myportfolio():
+
+
+    return render_template('users/portfolio.html')
