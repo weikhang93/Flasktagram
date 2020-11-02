@@ -62,7 +62,7 @@ def create():
     if new_user.save():
         flash("Your account has been created! Login now!" , "success")
 
-    return redirect(url_for('users.new'))
+    return redirect(url_for('home'))
 
 
 @users_blueprint.route('/<username>', methods=["GET"])

@@ -5,14 +5,14 @@
 {% block content %}
 
 
-<div class="btn-group dropright ml-5 mt-3">
+<div class="btn-group dropright ml-5 mt-3 show">
     <button type="button" class="btn btn-primary">
       {{search_result|length}} user is found for "{{username}}"
     </button>
-    <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       <span class="sr-only">Toggle Dropright</span>
     </button>
-    <div style="width: 500px;" class="dropdown-menu">
+    <div style="width: 500px;" class="dropdown-menu show">
       <ul class="mt-3 list-group ">
         {% for user in search_result %}
         <a style="text-decoration: none;" href="{{url_for('users.show' ,username=user.username)}}">
