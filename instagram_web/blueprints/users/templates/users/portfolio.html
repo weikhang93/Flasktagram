@@ -19,63 +19,63 @@
 
     }
 
-    @-webkit-keyframes shakeme {
+    @keyframes shakeme {
         0% {
-            -webkit-transform: translate(2px, 1px) rotate(0deg);
+            transform: translate(2px, 1px) rotate(0deg);
         }
 
         10% {
-            -webkit-transform: translate(-1px, -2px) rotate(-1deg);
+            transform: translate(-1px, -2px) rotate(-1deg);
         }
 
         20% {
-            -webkit-transform: translate(-3px, 0px) rotate(1deg);
+            transform: translate(-3px, 0px) rotate(1deg);
         }
 
         30% {
-            -webkit-transform: translate(0px, 2px) rotate(0deg);
+            transform: translate(0px, 2px) rotate(0deg);
         }
 
         40% {
-            -webkit-transform: translate(1px, -1px) rotate(1deg);
+            transform: translate(1px, -1px) rotate(1deg);
         }
 
         50% {
-            -webkit-transform: translate(-1px, 2px) rotate(-1deg);
+            transform: translate(-1px, 2px) rotate(-1deg);
         }
 
         60% {
-            -webkit-transform: translate(-3px, 1px) rotate(0deg);
+            transform: translate(-3px, 1px) rotate(0deg);
         }
 
         70% {
-            -webkit-transform: translate(2px, 1px) rotate(-1deg);
+            transform: translate(2px, 1px) rotate(-1deg);
         }
 
         80% {
-            -webkit-transform: translate(-1px, -1px) rotate(1deg);
+            transform: translate(-1px, -1px) rotate(1deg);
         }
 
         90% {
-            -webkit-transform: translate(2px, 2px) rotate(0deg);
+            transform: translate(2px, 2px) rotate(0deg);
         }
 
         100% {
-            -webkit-transform: translate(1px, -2px) rotate(-1deg);
+            transform: translate(1px, -2px) rotate(-1deg);
         }
     }
 
     .shakeme:hover,
     .shakeme:focus {
-        -webkit-animation-name: shakeme;
-        -webkit-animation-duration: 0.8s;
-        -webkit-transform-origin: 50% 50%;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: linear;
+        animation-name: shakeme;
+        animation-duration: 0.8s;
+        transform-origin: 50% 50%;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
     }
 
     .shakeme {
-        display: inline-block
+        display: inline-block;
     }
 </style>
 
@@ -120,8 +120,8 @@
         Portfolio projects. Click
         to visit.</h4>
 
-    <div style="background-color:rgb(236, 236, 236);" class="d-flex justify-content-around mb-0 pb-3 shadow-lg rounded">
-        <ul class="list-group rounded align-self-center">
+    <div style="background-color:rgb(236, 236, 236);" class="d-flex justify-content-between mb-0 pb-0 shadow-lg rounded">
+        <ul class="list-group rounded align-self-center ml-auto mr-auto">
             <li style="background-color: rgb(26, 24, 24);color: white;" class="list-group-item">Github repositaries</li>
 
             <a href="https://github.com/weikhang93/Reactstagram" target="_blank">
@@ -142,32 +142,33 @@
             </a>
         </ul>
 
-        <div style="width:75%" id="carouselExampleCaptions" class="carousel slide carousel-fade" data-ride="carousel">
+        <div style="width:75%" id="carouselExampleCaptions" class="carousel slide carousel-fade rounded" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                 <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active">
+                <div class="carousel-item  rounded active">
                     <a href="https://reactstagram.netlify.com" target="_blank">
                         <img style="height: 50vh;width: 100%;;"
-                            src="https://redoflask.s3-ap-southeast-1.amazonaws.com/reactstagram.png"
-                            class="d-block carouselimage" alt="reactstagram">
+                            src="https://redoflask.s3-ap-southeast-1.amazonaws.com/reactstagram3.png"
+                            class="d-block carouselimage rounded" alt="reactstagram">
                     </a>
                     <div class="carousel-caption d-none d-md-block">
-                        <p>A single page application that is built using React.</p>
+                        <h4 class="rounded border border-primary p-2" style="display: inline; color: black;background-color: rgb(236, 236, 236);" >A single page application that is built using React.</h4>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <a href="https://flasktagram.herokuapp.com" target="_blank">
 
                         <img style="height: 50vh;width:100%;"
-                            src="https://redoflask.s3-ap-southeast-1.amazonaws.com/flasktagram.png"
+                            src="https://redoflask.s3-ap-southeast-1.amazonaws.com/flasktagram2.png"
                             class="d-block carouselimage" alt="flasktagram">
                     </a>
                     <div class="carousel-caption d-none d-md-block">
-                        <p>Instagram clone built using web-microframework Flask</p>
+                        <h4 class="rounded border border-primary bg-primary p-2" style="display: inline;" >Instagram clone built using web-microframework Flask.</h4>
+                        
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -175,16 +176,17 @@
                         src="https://redoflask.s3-ap-southeast-1.amazonaws.com/saitama3.jpg"
                         class="d-block carouselimage" alt="remotemed">
                     <div class="carousel-caption d-none d-md-block">
-                        <p>RemoteMED havent deploy yet... hehehe</p>
+                        <h4 class="rounded border border-primary p-2" style="display: inline; color: black;background-color: rgb(236, 236, 236);" >RemoteMED havent deploy yet... hehehe.</h4>
+                        
                     </div>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <i style="color: rgb(0, 26, 255);" class="fa fas fa-2x fa-chevron-circle-left"></i>
                 <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <i style="color: rgb(0, 26, 255);" class="fa fas fa-2x fa-chevron-circle-right"></i>
                 <span class="sr-only">Next</span>
             </a>
         </div>
@@ -211,12 +213,12 @@
         <div class="text-center col-lg-3 col-md-4 col-sm-12 mt-3">
             <div class="card p-5 rounded-circle shakeme" style="width: 60%;">
                 <img height="100px" width="auto"
-                    src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
-                    class="card-img-top" alt="css">
-                <div class="card-body text-center">
+                    src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" class="card-img-top"
+                    alt="css">
+                
 
                     <button class="mt-2 btn btn-primary">CSS</button>
-                </div>
+                
             </div>
         </div>
         <div class="text-center col-lg-3 col-md-4 col-sm-12 mt-3">
