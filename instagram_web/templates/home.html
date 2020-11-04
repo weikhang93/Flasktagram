@@ -11,8 +11,6 @@ Homepage
 {% endblock %}
 
 {% block content %}
-
-{% if current_user.is_authenticated %}
 <style>
   .thirdpartyservice:hover {
     cursor: pointer;
@@ -31,9 +29,68 @@ Homepage
     }
 
   }
+
+  @keyframes shakeshake {
+    0% {
+      transform: translate(2px, 1px) rotate(0deg);
+    }
+
+    10% {
+      transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+      transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+      transform: translate(0px, 2px) rotate(0deg);
+    }
+
+    40% {
+      transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+      transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+      transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+      transform: translate(2px, 1px) rotate(-1deg);
+    }
+
+    80% {
+      transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+      transform: translate(2px, 2px) rotate(0deg);
+    }
+
+    100% {
+      transform: translate(1px, -2px) rotate(-1deg);
+    }
+  }
+
+  .shakeshake {
+    animation-name: shakeshake;
+    animation-duration: 0.8s;
+    transform-origin: 50% 50%;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .shakeshake {
+    display: inline-block;
+  }
 </style>
 
 
+{% if current_user.is_authenticated %}
 
 
 
@@ -47,7 +104,8 @@ Homepage
         <div class="card-body">
           <h5 class="card-title">S3 Bucket</h5>
           <p class="card-text">Uploads picture into Amazon Web Service's S3 Bucket.</p>
-          <a href="{{url_for('users.edit', id=current_user.id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Go to your own profile!" >Upload Image now!</a>
+          <a href="{{url_for('users.edit', id=current_user.id)}}" class="btn btn-primary" data-toggle="tooltip"
+            data-placement="bottom" title="Go to your own profile!">Upload Image now!</a>
         </div>
       </div>
     </div>
@@ -57,7 +115,8 @@ Homepage
         <div class="card-body">
           <h5 class="card-title">Sandbox</h5>
           <p class="card-text">Payment gateway of the donation for pictures.</p>
-          <a href="{{url_for('users.feed' ,username=current_user.username)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Find an image to donate at ImageFeed!">Donate now!</a>
+          <a href="{{url_for('users.feed' ,username=current_user.username)}}" class="btn btn-primary"
+            data-toggle="tooltip" data-placement="bottom" title="Find an image to donate at ImageFeed!">Donate now!</a>
         </div>
       </div>
     </div>
@@ -69,7 +128,8 @@ Homepage
           <p class="card-text">Login via google email using protocol Oauth 2.0.</p>
           <form action="{{url_for('sessions.destroy' , id=current_user.id)}}" method="POST">
             <input hidden name="csrf_token" value="{{csrf_token()}}">
-            <button id="dropdownnav" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Logout and use Gmail to Login again!">Login using Google Email?</button>
+            <button id="dropdownnav" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom"
+              title="Logout and use Gmail to Login again!">Login using Google Email?</button>
           </form>
         </div>
       </div>
@@ -80,7 +140,9 @@ Homepage
         <div class="card-body">
           <h5 class="card-title">Mailgun</h5>
           <p class="card-text">Automatically send an email after donation is received.</p>
-          <a href="{{url_for('users.feed' ,username=current_user.username)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Donate to someone! And you will receive a thank you email!">Test the feature</a>
+          <a href="{{url_for('users.feed' ,username=current_user.username)}}" class="btn btn-primary"
+            data-toggle="tooltip" data-placement="bottom"
+            title="Donate to someone! And you will receive a thank you email!">Test the feature</a>
         </div>
       </div>
     </div>
@@ -94,8 +156,8 @@ Homepage
 
 <script>
   $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
 </script>
 
@@ -136,11 +198,56 @@ Homepage
       </h4>
 
     </div>
+
     <div class="text-center col-lg-6 col-md-6 col-sm-12">
+      <!-- Button trigger modal -->
+      <button style="font-size: larger;" type="button" class="btn btn-primary  mb-2 shakeshake" data-toggle="modal"
+        data-target="#exampleModal">
+        Click Me!
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Tester Account!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background-color: rgb(143, 28, 209);">
+
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bg-primary" >
+
+                    <td>test1@gmail.com</td>
+                    <td>test1</td>
+                  </tr>
+                  <tr>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
       <h1>Login</h1>
 
 
-      <div class=" border border-primary pt-4 pb-5 rounded container d-flex justify-content-center mt-5">
+      <div class=" border border-primary pt-4 pb-5 rounded container shadow-lg d-flex justify-content-center mt-5">
 
 
 
