@@ -211,10 +211,11 @@ Homepage
     </div>
   </div>
 </div>
+<hr>
+
 
 {% endif %}
 
-<hr>
 
 
 <h1 class="m-5 border border-primary rounded d-inline p-2 mb-5">3rd party service that is integrated in <i style="color: rgb(122, 26, 212);"
@@ -227,7 +228,7 @@ Homepage
         <div class="card-body">
           <h5 class="card-title">S3 Bucket</h5>
           <p class="card-text">Uploads picture into Amazon Web Service's S3 Bucket.</p>
-          <a href="{{url_for('users.edit', id=current_user.id)}}"  class="btn btn-primary" data-toggle="tooltip"
+          <a href="{{url_for('users.edit', id=current_user.id)}}" class="btn btn-primary" data-toggle="tooltip"
             data-placement="bottom" title="Go to your own profile!">Upload Image now!</a>
         </div>
       </div>
