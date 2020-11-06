@@ -31,9 +31,11 @@
 
 </head>
 
-<body  style="font-family: 'Varela Round', sans-serif;" class="bg-light">
+<body  style="font-family: 'Varela Round', sans-serif;padding-top: 100px;" class="bg-light">
 
-  <nav class="text-white navbar navbar-expand-lg navbar-light bg-primary">
+
+
+  <nav style="top:0px;z-index:1;height: 80px;" class="text-white navbar navbar-expand-lg navbar-light bg-primary position-fixed w-100 ">
     <a class="text-white navbar-brand" href="{{url_for('home')}}">Flasktagram</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,11 +129,13 @@
       {% endif %}
     </div>
   </nav>
+
+
   {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
 
   {% for category, message in messages %}
-  <div style="text-align: center;">
+  <div style="text-align: center;position: relative;bottom: 20px;">
 
     <li id="flaskflash" class="alert alert-{{category}}">{{ message }}</li>
   </div>
